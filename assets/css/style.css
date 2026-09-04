@@ -1,0 +1,1040 @@
+/**
+ * =====================================================
+ * نظام إدارة المكتبة - الملف الرئيسي للتنسيق
+ * Library Management System - Main Stylesheet
+ * =====================================================
+ */
+
+/* =====================================================
+   1. المتغيرات العامة (CSS Variables)
+   ===================================================== */
+:root {
+    /* الألوان الأساسية - لوحة ألوان احترافية */
+    --primary:        #4f46e5;    /* أزرق بنفسجي - اللون الأساسي */
+    --primary-light:  #818cf8;    /* أفتح للهوفر */
+    --primary-dark:   #3730a3;    /* أغمق للضغط */
+    --primary-bg:     #eef2ff;    /* خلفية خفيفة من اللون الأساسي */
+
+    /* ألوان الحالة */
+    --success:        #059669;    /* أخضر - للنجاح */
+    --success-bg:     #ecfdf5;
+    --warning:        #d97706;    /* برتقالي - للتحذير */
+    --warning-bg:     #fffbeb;
+    --danger:         #dc2626;    /* أحمر - للخطأ والحذف */
+    --danger-bg:      #fef2f2;
+    --info:           #0891b2;    /* سماوي - للمعلومات */
+    --info-bg:        #ecfeff;
+
+    /* ألوان النصوص والخلفيات */
+    --text-primary:   #1e293b;    /* النص الأساسي */
+    --text-secondary: #64748b;    /* النص الثانوي */
+    --text-light:     #94a3b8;    /* النص الخفيف */
+    --bg-body:        #f1f5f9;    /* خلفية الصفحة */
+    --bg-white:       #ffffff;    /* خلفية البطاقات */
+    --border-color:   #e2e8f0;    /* لون الحدود */
+    --shadow:         0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md:      0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg:      0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* القائمة الجانبية */
+    --sidebar-width:  260px;
+    --sidebar-bg:     #1e293b;
+    --sidebar-text:   #cbd5e1;
+    --sidebar-hover:  #334155;
+    --sidebar-active: var(--primary);
+
+    /* أبعاد */
+    --radius:         12px;
+    --radius-sm:      8px;
+    --radius-lg:      16px;
+    --transition:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =====================================================
+   2. إعادة تعيين الأنماط الافتراضية (Reset)
+   ===================================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    background-color: var(--bg-body);
+    direction: rtl;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* =====================================================
+   3. القائمة الجانبية (Sidebar)
+   ===================================================== */
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+/* رأس القائمة الجانبية - الشعار */
+.sidebar-header {
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-header .logo {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 24px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.sidebar-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* قائمة التنقل */
+.sidebar-nav {
+    flex: 1;
+    padding: 16px 12px;
+}
+
+.sidebar-nav ul li {
+    margin-bottom: 4px;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border-radius: var(--radius-sm);
+    color: var(--sidebar-text);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.sidebar-nav ul li a:hover {
+    background: var(--sidebar-hover);
+    color: #fff;
+}
+
+.sidebar-nav ul li a.active {
+    background: var(--sidebar-active);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+}
+
+.sidebar-nav ul li a i {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* فاصل في القائمة */
+.nav-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 12px 8px;
+}
+
+/* ذيل القائمة الجانبية */
+.sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    color: var(--sidebar-text);
+    font-size: 14px;
+}
+
+.user-info i {
+    font-size: 22px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    color: #fca5a5;
+    font-weight: 500;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background: rgba(220, 38, 38, 0.15);
+    color: #fecaca;
+}
+
+/* =====================================================
+   4. المحتوى الرئيسي (Main Content)
+   ===================================================== */
+.main-content {
+    min-height: 100vh;
+    transition: var(--transition);
+}
+
+.main-content.with-sidebar {
+    margin-right: var(--sidebar-width);
+}
+
+.main-content.full-width {
+    margin-right: 0;
+}
+
+/* شريط التنقل العلوي */
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 28px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.sidebar-toggle:hover {
+    background: var(--bg-body);
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    flex: 1;
+}
+
+.top-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.current-date {
+    color: var(--text-secondary);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* غلاف المحتوى */
+.content-wrapper {
+    padding: 28px;
+}
+
+/* =====================================================
+   5. البطاقات الإحصائية (Stats Cards)
+   ===================================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card .stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.stat-card .stat-icon.blue    { background: var(--primary-bg); color: var(--primary); }
+.stat-card .stat-icon.green   { background: var(--success-bg); color: var(--success); }
+.stat-card .stat-icon.orange  { background: var(--warning-bg); color: var(--warning); }
+.stat-card .stat-icon.cyan    { background: var(--info-bg);    color: var(--info);    }
+
+.stat-card .stat-info h3 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.stat-card .stat-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* =====================================================
+   6. البطاقات العامة (Cards)
+   ===================================================== */
+.card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+/* =====================================================
+   7. الجداول (Tables)
+   ===================================================== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead th {
+    background: var(--bg-body);
+    padding: 12px 16px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.data-table tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.data-table tbody tr {
+    transition: var(--transition);
+}
+
+.data-table tbody tr:hover {
+    background: var(--primary-bg);
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =====================================================
+   8. الأزرار (Buttons)
+   ===================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn i {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+
+.btn-success {
+    background: var(--success);
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #047857;
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: #fff;
+}
+
+.btn-warning:hover {
+    background: #b45309;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.btn-sm i {
+    font-size: 12px;
+}
+
+/* مجموعة الأزرار في الجداول */
+.action-btns {
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+/* =====================================================
+   9. النماذج (Forms)
+   ===================================================== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.form-group label .required {
+    color: var(--danger);
+    margin-right: 2px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 11px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--bg-white);
+    transition: var(--transition);
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.form-control::placeholder {
+    color: var(--text-light);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+select.form-control {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+    padding-left: 36px;
+}
+
+/* شبكة النماذج */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 20px;
+}
+
+.form-grid .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* =====================================================
+   10. رسائل التنبيه (Alerts)
+   ===================================================== */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 20px;
+    font-weight: 500;
+    animation: slideDown 0.4s ease;
+}
+
+.alert-success {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid #a7f3d0;
+}
+
+.alert-error {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+.alert-icon {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.alert-close {
+    margin-right: auto;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================================================
+   11. شريط البحث (Search Bar)
+   ===================================================== */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar .form-control {
+    flex: 1;
+    max-width: 400px;
+}
+
+/* =====================================================
+   12. شارة الحالة (Status Badge)
+   ===================================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-success {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.badge-warning {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.badge-danger {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.badge-info {
+    background: var(--info-bg);
+    color: var(--info);
+}
+
+/* =====================================================
+   13. صفحة تسجيل الدخول (Login Page)
+   ===================================================== */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.login-header .login-logo {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 32px;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+}
+
+.login-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.login-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.login-card .form-group {
+    margin-bottom: 20px;
+}
+
+.login-card .form-group label {
+    font-size: 14px;
+}
+
+.login-card .form-group .input-icon-wrapper {
+    position: relative;
+}
+
+.login-card .form-group .input-icon-wrapper i {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.login-card .form-group .input-icon-wrapper .form-control {
+    padding-right: 42px;
+}
+
+.login-card .btn-primary {
+    width: 100%;
+    padding: 13px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    margin-top: 8px;
+}
+
+/* =====================================================
+   14. صفحات إضافية (About / Contact)
+   ===================================================== */
+.page-hero {
+    text-align: center;
+    padding: 48px 24px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius);
+    color: #fff;
+    margin-bottom: 28px;
+}
+
+.page-hero h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.page-hero p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.info-card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.info-card .info-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.info-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   15. حالة فارغة (Empty State)
+   ===================================================== */
+.empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-secondary);
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+/* =====================================================
+   16. نافذة تأكيد الحذف (Delete Confirmation Modal)
+   ===================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    padding: 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    animation: modalIn 0.3s ease;
+}
+
+.modal-box .modal-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--danger-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+    color: var(--danger);
+}
+
+.modal-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.modal-box p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =====================================================
+   17. الفوتر (Footer)
+   ===================================================== */
+.footer {
+    text-align: center;
+    padding: 18px 24px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-white);
+}
+
+.footer.with-sidebar {
+    margin-right: var(--sidebar-width);
+}
+
+/* =====================================================
+   18. التجاوب (Responsive)
+   ===================================================== */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content.with-sidebar {
+        margin-right: 0;
+    }
+
+    .footer.with-sidebar {
+        margin-right: 0;
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 16px;
+    }
+
+    .top-bar {
+        padding: 12px 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-card .stat-info h3 {
+        font-size: 22px;
+    }
+
+    .page-hero {
+        padding: 32px 16px;
+    }
+
+    .page-hero h1 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar .form-control {
+        max-width: 100%;
+    }
+
+    .action-btns {
+        flex-wrap: wrap;
+    }
+
+    .login-card {
+        padding: 28px 20px;
+    }
+}
+
+/* =====================================================
+   19. أنماط الطباعة (Print)
+   ===================================================== */
+@media print {
+    .sidebar,
+    .top-bar,
+    .footer,
+    .action-btns,
+    .search-bar,
+    .btn {
+        display: none !important;
+    }
+
+    .main-content.with-sidebar {
+        margin-right: 0;
+    }
+
+    .data-table {
+        font-size: 12px;
+    }
+}
