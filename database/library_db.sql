@@ -38,7 +38,7 @@ CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,                          -- معرّف فريد للكتاب
     title VARCHAR(255) NOT NULL,                                -- عنوان الكتاب
     author VARCHAR(150) NOT NULL,                               -- اسم المؤلف
-    isbn VARCHAR(20) UNIQUE,                                    -- الرقم المعياري الدولي للكتاب (ISBN)
+    isbn VARCHAR(100) UNIQUE,                                   -- الرقم المعياري الدولي للكتاب (ISBN)
     publisher VARCHAR(150),                                     -- دار النشر
     publish_year YEAR,                                          -- سنة النشر
     category VARCHAR(100),                                      -- تصنيف الكتاب (مثل: علوم، أدب، تاريخ)

@@ -35,7 +35,7 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = sanitize($_POST['title'] ?? '');
     $author = sanitize($_POST['author'] ?? '');
-    $isbn = sanitize($_POST['isbn'] ?? '');
+    $isbn = mb_substr(sanitize($_POST['isbn'] ?? ''), 0, 100);
     $publisher = sanitize($_POST['publisher'] ?? '');
     $publish_year = sanitize($_POST['publish_year'] ?? '');
     $category = sanitize($_POST['category'] ?? '');
